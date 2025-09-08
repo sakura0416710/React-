@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import common from './PagesCommon.module.css';
+import style from'./MembersManagement.module.css';
 
 const MembersManagement = ({ members }) => {
     const [members, setMembers] = useState([]);
@@ -103,7 +105,7 @@ const MembersManagement = ({ members }) => {
                             <input
                                 type="radio"
                                 name={`admin-${member.id}`}
-                                value=""
+                                value="2"
                                 checked={editValue =='2'}
                                 onChange = {e => setEditValue(e.target.value)}
                                 onKeyUp={handleKeyPress}
@@ -247,16 +249,16 @@ const MembersManagement = ({ members }) => {
 
   return (
     <>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Members</h1>
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 className="h2">Members</h1>
 					<div>
-						<span class="info">* 더블클릭을 하면 수정 칸으로 바뀝니다</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span class="info">* 수정 후 엔터를 누르면 수정이 완료됩니다</span>
+						<span className={style.info}>* 더블클릭을 하면 수정 칸으로 바뀝니다</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span className={style.info}>* 수정 후 엔터를 누르면 수정이 완료됩니다</span>
 					</div>
 				</div>
 				
-				<div class="bd-example">
-					<table class="table table-hover" style="text-align: center;">
+				<div className="bd-example">
+					<table className={`table table-hover ${common.table}`} style={{textAlign: 'center'}}>
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -286,13 +288,13 @@ const MembersManagement = ({ members }) => {
                                 <td>{rendercell(item.enroll, 'enrollDate', item)}</td>
                                 <td>
                                     <div //같은 상태값일 때는 굳이 함수를 실행하지 않고 반대값으로 바꿀 때에만 함수 실행하도록 만들기.
-                                        className={item.memberStatus === "Y" ? "select" : ''}
+                                        className={item.memberStatus === "Y" ? `${common.select}` : ''}
                                         onClick={() => item.memberStatus == 'N' ? handleStatusToggle(item, 'memberStatus', 'Y') : null}
-                                        style={{cursor : 'pointer'}}    
+                                    style={{cusor : 'pointer'}}    
                                     >Y</div>
-                                    <div className={item.memberStatus === "N" ? "select" : ''}
+                                    <div className={item.memberStatus === "N" ? `${common.select}` : ''}
                                         onClick={() => item.memberStatus == 'Y' ? handleStatusToggle(item, 'memberStatus', 'N') : null}
-                                        style={{cursor : 'pointer'}}
+                                    style={{cusor : 'pointer'}}
                                     >N</div>
                                 </td>
                                 <td>{rendercell(item.isAdmin, 'isAdmin', item)}</td>
