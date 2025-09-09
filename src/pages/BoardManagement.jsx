@@ -131,51 +131,7 @@ const BoardManagement = () => {
             
            
            {/* pageInfo가 있어야만 작동하도록(없으면 null이라 오류나니까)하기 : 조건부 렌더링 */}
-            {pageInfo && (
-                <nav aria-label="Standard pagination example" style={{ float: 'right' }}>
-                    <ul className="pagination">
-                        
-                        <li className={`page-item ${currentPage <= 1 ? 'disabled' : ''}`}>
-                            <button
-                                className="page-link"
-                                onClick={() => currentPage > 1 && changePage(currentPage - 1)}
-                                aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            </button>
-                        </li>
-
-
-                        {/* ArrayFrom(arrayLike, mapFn?, thisArg?)
-                         arrayLike : length속성을 갖고 있는 객체
-                         mapFn : 각 요소를 변환할 때 실행할 함수 
-                         thisArg : mapFn 내부에서 this로 사용할 값
-                         
-                         map(item, index, array)
-                         map(_, index)  : index는 필요하지만 아이템은 필요없지만 요소상 필요할 때 _ 사용
-                         */}
-                         
-                        {Array.from(
-                            {length:pageInfo.endPage - pageInfo.startPage + 1},
-                            (_, index) => pageInfo.startPage + index
-                        ).map(pageNum=>(
-                            <li className={`page-item ${currentPage == pageNum ? 'active' : ''}`} key={pageNum}>
-                                <button className="page-link" onClick = {() => changePage(pageNum)}>{pageNum}</button>
-                            </li>
-                        ))}
-                        
-
-                        <li className={`page-item ${currentPage >= pageInfo.maxPage ? 'disabled' : ''}`}>
-                            <button
-                                className="page-link"
-                                onClick={() => currentPage < pageInfo.maxPage && changePage(currentPage + 1)}
-                                disabled={currentPage >= pageInfo.maxPage}
-                                aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            )}
+            <Pagination currentPage={currentPage} changePage ={changePage} pageInfo={pageInfo} />
 
             
 
@@ -188,6 +144,8 @@ const BoardManagement = () => {
                             <button type="button" className="btn-close" onClick={closeModal} aria-label="Close"></button>
                         </div>
                         <div className="modal-body">{selectBoard.boardContent}</div>
+                        <br></br>
+                        
                         <div className="modal-body" style={{textAlign: 'right' , fontSize: '14px'}}>작성자 : {selectBoard.nickName}</div>
                         <div className="modal-footer">
                             <button 
